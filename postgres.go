@@ -3,6 +3,7 @@ package hood
 import (
 	"fmt"
 	_ "github.com/lib/pq"
+	"reflect"
 	"strings"
 	"time"
 )
@@ -43,6 +44,14 @@ func (d *postgres) SqlType(f interface{}, size int) string {
 		}
 		return "text"
 	}
+
+	switch reflect.TypeOf(f).Kind() {
+	case reflect.Int, reflect.Int8, reflect.Int16, reflect.Int32:
+		return "integer"
+	case reflect.Int64:
+		return "bigint"
+	}
+
 	panic("invalid sql type")
 }
 
