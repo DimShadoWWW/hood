@@ -16,7 +16,8 @@ import (
 
 import (
 	_ "github.com/lib/pq"
-	_ "github.com/ziutek/mymysql/godrv"
+	// _ "github.com/ziutek/mymysql/godrv"
+	_ "github.com/go-sql-driver/mysql"
 )
 
 var toRun = []dialectInfo{
