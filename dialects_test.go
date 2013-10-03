@@ -116,7 +116,7 @@ func setupPgDb(t *testing.T) *Hood {
 
 func setupMysql(t *testing.T) *Hood {
 	// db, err := sql.Open("mymysql", "hood_test/hood/")
-	db, err := sql.Open("mymysql", "unix:/Applications/MAMP/tmp/mysql/mysql.sock*hood_test/hood/")
+	db, err := sql.Open("mysql", "unix:/Applications/MAMP/tmp/mysql/mysql.sock*hood_test/hood/")
 	if err != nil {
 		t.Fatal("could not open db", err)
 	}
