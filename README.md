@@ -266,7 +266,7 @@ import (
 
 func main() {
     // Open a DB connection, use New() alternatively for unregistered dialects
-    hd, err := hood.Open("postgres", "dbname=smartdb user=beego password=beego")
+    hd, err := hood.Open("postgres", "dbname=yourdb user=youruser password=yourpass")
     if err != nil {
         panic(err)
     }
