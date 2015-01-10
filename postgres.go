@@ -29,7 +29,9 @@ func (d *postgres) SqlType(f interface{}, size int) string {
 		return "timestamp with time zone"
 	case bool:
 		return "boolean"
-	case int, int8, int16, int32, uint, uint8, uint16, uint32:
+	case int8, int16, uint8, uint16:
+		return "smallint"
+	case int, int32, uint, uint32:
 		return "integer"
 	case int64, uint64:
 		return "bigint"
