@@ -1293,8 +1293,16 @@ func addFields(m *Model, t reflect.Type, v reflect.Value) {
 				parsedValidateTags = parseTags(rawValidateTag)
 			}
 		}
+		columnTag := field.Tag.Get("column")
+		var name string
+		if columnTag != "" {
+			name = columnTag
+		} else {
+			name = toSnake(field.Name)
+		}
+
 		fd := &ModelField{
-			Name:         toSnake(field.Name),
+			Name:         name,
 			Value:        v.FieldByName(field.Name).Interface(),
 			SqlTags:      parsedSqlTags,
 			ValidateTags: parsedValidateTags,
