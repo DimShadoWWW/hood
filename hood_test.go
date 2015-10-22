@@ -140,6 +140,18 @@ func TestFieldOmit(t *testing.T) {
 	}
 }
 
+func TestFieldRename(t *testing.T) {
+	type Schema struct {
+		A string `column:"foo"`
+	}
+	m, _ := interfaceToModel(&Schema{})
+	for _, field := range m.Fields {
+		if field.Name != "foo" {
+			t.Fatal("column should be foo")
+		}
+	}
+}
+
 type validateSchema struct {
 	A string
 }
