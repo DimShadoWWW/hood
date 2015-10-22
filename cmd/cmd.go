@@ -223,7 +223,7 @@ func runMigrations(steps int32) {
 	// Read the migrations dir
 	info, err := ioutil.ReadDir(path.Join(workingDir, migrationsDir))
 	if err != nil {
-		panic(nil)
+		panic(err)
 	}
 
 	// Create a temp dir to copy the migrations to
