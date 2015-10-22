@@ -1,3 +1,8 @@
+**Disclaimer:** This is a personal repo with personal changes. Use with
+caution.
+
+---
+
 If you are looking for something more lightweight and flexible, have a look at [jet](http://github.com/eaigner/jet)
 
 For questions, suggestions and general topics visit the [group](https://groups.google.com/forum/#!forum/golang-hood).

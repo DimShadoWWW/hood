@@ -94,10 +94,10 @@ func readConf() {
 	}
 
 	if node, ok := root["driver"].(string); ok {
-		driver = node
+		driver = os.ExpandEnv(node)
 	}
 	if node, ok := root["source"].(string); ok {
-		source = node
+		source = os.ExpandEnv(node)
 	}
 }
 
