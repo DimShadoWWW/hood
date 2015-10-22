@@ -7,7 +7,7 @@ import (
 )
 
 func init() {
-	RegisterDialect("mymysql", NewMysql())
+	RegisterDialect("mysql", NewMysql())
 }
 
 type mysql struct {

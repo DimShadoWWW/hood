@@ -16,7 +16,8 @@ import (
 
 import (
 	_ "github.com/lib/pq"
-	_ "github.com/ziutek/mymysql/godrv"
+	// _ "github.com/ziutek/mymysql/godrv"
+	_ "github.com/go-sql-driver/mysql"
 )
 
 var toRun = []dialectInfo{
@@ -115,7 +116,7 @@ func setupPgDb(t *testing.T) *Hood {
 
 func setupMysql(t *testing.T) *Hood {
 	// db, err := sql.Open("mymysql", "hood_test/hood/")
-	db, err := sql.Open("mymysql", "unix:/Applications/MAMP/tmp/mysql/mysql.sock*hood_test/hood/")
+	db, err := sql.Open("mysql", "unix:/Applications/MAMP/tmp/mysql/mysql.sock*hood_test/hood/")
 	if err != nil {
 		t.Fatal("could not open db", err)
 	}
@@ -616,6 +617,89 @@ func DoTestFind(t *testing.T, info dialectInfo) {
 	}
 	if x := len(out); x != 2 {
 		t.Fatal("invalid output length", x)
+	}
+}
+
+func TestFindOne(t *testing.T) {
+	for _, info := range toRun {
+		DoTestFindOne(t, info)
+	}
+}
+
+func DoTestFindOne(t *testing.T, info dialectInfo) {
+	t.Logf("Dialect %T\n", info.dialect)
+	hd := info.setupDbFunc(t)
+
+	type findOneModel struct {
+		Id Id
+		A  string
+		B  int
+	}
+
+	model1 := findOneModel{
+		A: "string!",
+		B: 2,
+	}
+
+	hd.DropTable(&model1)
+
+	tx := hd.Begin()
+	tx.CreateTable(&model1)
+	err := tx.Commit()
+	if err != nil {
+		t.Fatal("error not nil", err)
+	}
+
+	// Test with no data (should be empty)
+
+	// Test with struct
+	var out findOneModel
+	err = hd.Where("a", "=", "string!").And("b", "=", 2).FindOne(&out)
+	if err != nil {
+		t.Fatal("error not nil", err)
+	}
+	if out.Id != 0 || out.A != "" || out.B != 0 {
+		t.Fatal("struct should be zeroed", out)
+	}
+
+	// Test with pointer to struct
+	var out2 *findOneModel
+	err = hd.Where("a", "=", "string!").And("b", "=", 2).FindOne(&out)
+	if err != nil {
+		t.Fatal("error not nil", err)
+	}
+	if out2 != nil {
+		t.Fatal("ptr should be nil", out)
+	}
+
+	// Insert a row, test again:
+	id, err := hd.Save(&model1)
+	if err != nil {
+		t.Fatal("error not nil", err)
+	}
+	if id != 1 {
+		t.Fatal("wrong id", id)
+	}
+
+	// Test with struct
+	err = hd.Where("a", "=", "string!").And("b", "=", 2).FindOne(&out)
+	if err != nil {
+		t.Fatal("error not nil", err)
+	}
+	if out.Id != 1 || out.A != "string!" || out.B != 2 {
+		t.Fatal("struct is not expected", out)
+	}
+
+	// Test with pointer to struct
+	err = hd.Where("a", "=", "string!").And("b", "=", 2).FindOne(&out2)
+	if err != nil {
+		t.Fatal("error not nil", err)
+	}
+	if out2 == nil {
+		t.Fatal("ptr should not be nil", out2)
+	}
+	if out2.Id != 1 || out2.A != "string!" || out2.B != 2 {
+		t.Fatal("struct is not expected", out)
 	}
 }
 
