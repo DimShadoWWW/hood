@@ -2,7 +2,7 @@ package main
 
 import (
 	"flag"
-	"github.com/eaigner/hood"
+	"github.com/DimShadoWWW/hood"
 	"io/ioutil"
 	"log"
 	"os/exec"

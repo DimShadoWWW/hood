@@ -569,7 +569,7 @@ L:
 		"package db",
 		"",
 		"import (",
-		"\t\"github.com/eaigner/hood\"",
+		"\t\"github.com/DimShadoWWW/hood\"",
 	}
 	if timeRequired {
 		head = append(head, "\t\"time\"")

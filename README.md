@@ -17,7 +17,7 @@ For questions, suggestions and general topics visit the [group](https://groups.g
 - [Validation](#validation)
 - [Hooks](#hooks)
 - [Basic Example](#basic-example)
-- [Contributors](https://github.com/eaigner/hood/contributors)
+- [Contributors](https://github.com/DimShadoWWW/hood/contributors)
 
 ## Overview
 
@@ -37,12 +37,12 @@ Dialects currently implemented
 - **Postgres** using [github.com/lib/pq](https://github.com/lib/pq)
 - **MySQL** using [github.com/go-sql-driver/mysql](github.com/go-sql-driver/mysql) 
 
-Adding a dialect is simple. Just create a new file named `<dialect_name>.go` and the corresponding struct type, and mixin the `Base` dialect. Then implement the methods that are specific to the new dialect (for an example see [`postgres.go`](https://github.com/eaigner/hood/blob/master/postgres.go)).
+Adding a dialect is simple. Just create a new file named `<dialect_name>.go` and the corresponding struct type, and mixin the `Base` dialect. Then implement the methods that are specific to the new dialect (for an example see [`postgres.go`](https://github.com/DimShadoWWW/hood/blob/master/postgres.go)).
 
 ## Documentation
 
-You can find the documentation over at [GoDoc](http://godoc.org/github.com/eaigner/hood).
-**To get a sense of the API, it's best to take a quick look at the [unit tests](https://github.com/eaigner/hood/blob/master/dialects_test.go), as they are always up to date!**
+You can find the documentation over at [GoDoc](http://godoc.org/github.com/DimShadoWWW/hood).
+**To get a sense of the API, it's best to take a quick look at the [unit tests](https://github.com/DimShadoWWW/hood/blob/master/dialects_test.go), as they are always up to date!**
 
 ## Opening a Database
 
@@ -115,8 +115,8 @@ The following built in field properties are defined (via `sql:` tag):
 
 To use migrations, you first have to install the `hood` tool. To do that run the following:
 
-    go get github.com/eaigner/hood
-    cd $GOPATH/src/github.com/eaigner/hood
+    go get github.com/DimShadoWWW/hood
+    cd $GOPATH/src/github.com/DimShadoWWW/hood
     ./install.sh
 
 Assuming you have your `$GOPATH/bin` directory in your `PATH`, you can now invoke the hood tool with `hood`.
@@ -191,7 +191,7 @@ current state of the database! In our example, it will look like this:
 package db
 
 import (
-  "github.com/eaigner/hood"
+  "github.com/DimShadoWWW/hood"
 )
 
 type Users struct {
@@ -265,7 +265,7 @@ The following hooks are defined:
 package main
 
 import (
-    "github.com/eaigner/hood"
+    "github.com/DimShadoWWW/hood"
     "fmt"
 )
 

@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/eaigner/hood"
+	"github.com/DimShadoWWW/hood"
 )
 
 func (m *M) {{.Name}}_{{.Timestamp}}_Up(hd *hood.Hood) {
